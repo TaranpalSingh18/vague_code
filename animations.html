@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    position: relative;
+    min-height: 100vh;
+    background-color: #000000; 
+}
+
+        header {
+            position: relative;
+            z-index: 10;
+        }
+
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 89%;
+            object-fit: cover;
+            z-index: 0;
+        ;
+        }
+
+        .banner {
+            position: relative;
+            z-index: 1;
+            height: 100vh; /* You can adjust this based on the size of the Kohli image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Ensures video doesn't overflow */
+        }
+
+        .slider {
+            position: relative;
+            display: flex;
+            gap: 20px;
+        }
+
+        .item {
+            flex: 1;
+        }
+
+        .centered-image {
+            position: absolute;
+            z-index: 2;
+        }
+
+        .centered-image img {
+            display: block;
+            margin: auto;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="cursor"></div>
+    <header>
+        <div id="main">
+            <div class="header-logo">
+                <svg class="icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            
+                </svg>
+                <span style="margin-left:7px; color: white;">MatchMaster</span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Models</a></li>
+                    <li><a href="">Future Scope</a></li>
+                    <li><button>Sign In</button></li>
+                    <li><button>Log In</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner and Video Container -->
+    <div class="banner">
+        <video autoplay muted loop id="background-video">
+            <source src="assets/thunder.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="slider" style="--quantity: 5">
+            <div class="item" style="--position: 1"><img src="assets/csk.jpeg" alt=""></div>
+            <div class="item" style="--position: 2"><img src="assets/kkr.jpeg" alt=""></div>
+            <div class="item" style="--position: 3"><img src="assets/rcb.jpeg" alt=""></div>
+            <div class="item" style="--position: 4"><img src="assets/rr final.jpeg" alt=""></div>
+            <div class="item" style="--position: 5"><img src="assets/srh_final.jpeg" alt=""></div>
+        </div>
+        <div class="centered-image">
+            <img src="assets/kohli.png" alt="Centered Image">
+        </div>
+    </div>
+    <form action="/predict" method="POST">
+        <div class="dropdown-container" style="display: flex; justify-content: center; gap: 20px; margin-top:-5px;">
+            <!-- 1st opponent IPL team -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <label for="ipl-team-1" style="font-size: 14px; padding-bottom: 10px;">Select your 1st opponent IPL team:</label>
+                <select id="ipl-team-1" name="ipl-team-1" style="padding: 5px; font-size: 14px;">
+                    <option value="csk">Chennai Super Kings</option>
+                    <option value="kkr">Kolkata Knight Riders</option>
+                    <option value="rcb">Royal Challengers Bangalore</option>
+                    <option value="rr">Rajasthan Royals</option>
+                    <option value="srh">Sunrisers Hyderabad</option>
+                    <option value="mi">Mumbai Indians</option>
+                </select>
+            </div>
+            
+            <!-- 2nd opponent IPL team -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <label for="ipl-team-2" style="font-size: 14px; padding-bottom: 10px;">Select your 2nd opponent IPL team:</label>
+                <select id="ipl-team-2" name="ipl-team-2" style="padding: 5px; font-size: 14px;">
+                    <option value="csk">Chennai Super Kings</option>
+                    <option value="kkr">Kolkata Knight Riders</option>
+                    <option value="rcb">Royal Challengers Bangalore</option>
+                    <option value="rr">Rajasthan Royals</option>
+                    <option value="srh">Sunrisers Hyderabad</option>
+                    <option value="mi">Mumbai Indians</option>
+                </select>
+            </div>
+        
+            <!-- Final opponent IPL team -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <label for="ipl-team-final" style="font-size: 14px; padding-bottom: 10px;">Final Opponent Team</label>
+                <select id="ipl-team-final" name="ipl-team-final" style="padding: 5px; font-size: 14px;">
+                    <option value="csk">Chennai Super Kings</option>
+                    <option value="kkr">Kolkata Knight Riders</option>
+                    <option value="rcb">Royal Challengers Bangalore</option>
+                    <option value="rr">Rajasthan Royals</option>
+                    <option value="srh">Sunrisers Hyderabad</option>
+                    <option value="mi">Mumbai Indians</option>
+                </select>
+            </div>
+        </div>
+    
+        <!-- Submit Button -->
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <button type="submit" style="padding: 10px 20px; font-size: 16px;">Predict</button>
+        </div>
+    </form>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+</html>

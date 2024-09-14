@@ -1,0 +1,260 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
+    transition: transform 1s ease-in-out; /* Smooth transition for hover effect */
+}
+
+@keyframes autoRun {
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider:hover {
+    animation-play-state: paused; /* Pause animation on hover */
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(550px); /* This value controls the radius */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for scaling */
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out; /* Smooth transition for image scaling */
+}
+
+.banner .slider .item:hover {
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(550px) scale(1.1); /* Scale up on hover */
+    z-index: 3; /* Bring hovered item to the front */
+}
+
+.banner .centered-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Make sure Kohli image is above other images */
+}
+
+.banner .centered-image img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.banner .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .content h1 {
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    color: #25283B;
+    position: relative;
+}
+
+.banner .content h1::after {
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #d2d2d2;
+    color: transparent;
+}
+
+.banner .content .author {
+    font-family: Poppins;
+    text-align: right;
+    max-width: 200px;
+}
+
+.banner .content h2 {
+    font-size: 3em;
+}
+
+.banner .content .model {
+    background-image: url(images/model.png);
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 160px;
+        height: 200px;
+        left: calc(50% - 80px);
+    }
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(300px); /* Reduced radius */
+    }
+    .banner .content h1 {
+        text-align: center;
+        width: 100%;
+        text-shadow: 0 10px 20px #000;
+        font-size: 7em;
+    }
+    .banner .content .author {
+        color: #fff;
+        padding: 20px;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px;
+        height: 150px;
+        left: calc(50% - 50px);
+    }
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(180px); /* Further reduced radius */
+    }
+    .banner .content h1 {
+        font-size: 5em;
+    }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    backdrop-filter: blur(10px); /* Backdrop blur effect */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Shiny lining effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
+    border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo .icon {
+    color: #f6e05e;
+    /* margin-right: 8px; */
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 400px;
+    padding-right: 10px;
+}
+
+nav ul li {
+    margin-right: 40px;
+    padding-top: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+nav ul li button {
+    background-color: #34d399;
+    color: #000;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: -3px;
+}
+
+nav ul li button:hover {
+    background-color: white; /* Change the background color of the button on hover */
+}
+
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* Make sure the video stays behind the content */
+}
+#cursor{
+    width: 30px;
+    height: 30px;
+    border-radius:50%;
+
+    opacity: 0.7;
+    position: fixed;
+    background-color: white;
+}
+
+#cursor {
+  width: 30px; /* Adjust the size according to the image */
+  height: 30px;
+  position: fixed; /* Ensure it stays fixed and follows the viewport */
+  pointer-events: none; /* So it doesn't block interactions */
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Max z-index to stay above everything */
+  opacity:0.7;
+  background-image: url('assets/8.png'); /* Add your custom image here */
+  transition: left 0.1s ease, top 0.1s ease; /* Delay for smooth movement */
+}
